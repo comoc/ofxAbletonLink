@@ -4,7 +4,7 @@ ofxAbletonLink is a [Ableton Link](https://github.com/Ableton/link) addon for [o
 
 # Installation
 
-To install ofxAbletonLink, move the ofxFft folder to your `of/addons/` folder.
+To install ofxAbletonLink, move the ofxAbletonLink folder to your `of/addons/` folder.
 
 ```
 $ cd ofxAbletonLink
