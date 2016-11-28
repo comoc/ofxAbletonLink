@@ -45,50 +45,50 @@ class ofxAbletonLinkListener;
 
 class ofxAbletonLink
 {
-	public:
-    struct Result {
-        double beat;
-        double phase;
-        Result() : beat(0.0), phase(0.0) {}
-    };
-		ofxAbletonLink();
+    public:
+        struct Result {
+            double beat;
+            double phase;
+            Result() : beat(0.0), phase(0.0) {}
+        };
+        ofxAbletonLink();
         ~ofxAbletonLink();
 
         ofxAbletonLink(const ofxAbletonLink&) = delete;
         ofxAbletonLink& operator=(const ableton::Link&) = delete;
-		ofxAbletonLink(ofxAbletonLink&&) = delete;
-		ofxAbletonLink& operator=(ofxAbletonLink&&) = delete;
+        ofxAbletonLink(ofxAbletonLink&&) = delete;
+        ofxAbletonLink& operator=(ofxAbletonLink&&) = delete;
 
         void setup(double tempo, ofxAbletonLinkListener* listener = 0);
-    
-		void setTempo(double, std::chrono::microseconds atTime);
-		double tempo();
+
+        void setTempo(double, std::chrono::microseconds atTime);
+        double tempo();
 
         void setQuantum(double quantum);
         double quantum();
-    
+
         bool isEnabled() const;
         void enable(bool bEnable);
-    
-		unsigned long numberOfPeers();
 
-		Result update();
-    
-	private:
-		ableton::Link* link;
-		ofxAbletonLinkListener* listener;
+        unsigned long numberOfPeers();
+
+        Result update();
+
+    private:
+        ableton::Link* link;
+        ofxAbletonLinkListener* listener;
         double quantum_;
 };
 
 class ofxAbletonLinkListener
 {
-	public:
+    public:
         ofxAbletonLinkListener() {}
         virtual ~ofxAbletonLinkListener() {}
-		virtual void onNumberOfPeersChanged(unsigned long peers) = 0;
-		virtual void onTempoChanged(double tempo) = 0;
-		ofxAbletonLinkListener(const ofxAbletonLinkListener&) = delete;
-		ofxAbletonLinkListener(ofxAbletonLinkListener&&) = delete;
-		ofxAbletonLinkListener& operator=(ofxAbletonLinkListener&&) = delete;
+        virtual void onNumberOfPeersChanged(unsigned long peers) = 0;
+        virtual void onTempoChanged(double tempo) = 0;
+        ofxAbletonLinkListener(const ofxAbletonLinkListener&) = delete;
+        ofxAbletonLinkListener(ofxAbletonLinkListener&&) = delete;
+        ofxAbletonLinkListener& operator=(ofxAbletonLinkListener&&) = delete;
 };
 
