@@ -20,14 +20,12 @@
 #include "ofxAbletonLink.h"
 
 ofxAbletonLink::ofxAbletonLink()
-	: link(0),
-	listener(0),
-    quantum_(4.0)
-{
+    : link(0),
+    listener(0),
+    quantum_(4.0){
 }
 
-ofxAbletonLink::~ofxAbletonLink()
-{
+ofxAbletonLink::~ofxAbletonLink(){
     if (link != 0) {
         link->enable(false);
         delete link;
@@ -35,8 +33,7 @@ ofxAbletonLink::~ofxAbletonLink()
 }
 
 
-void ofxAbletonLink::setup(double tempo, ofxAbletonLinkListener* listener)
-{
+void ofxAbletonLink::setup(double tempo, ofxAbletonLinkListener* listener){
     if (link != 0) {
         link->enable(false);
         delete link;
@@ -44,76 +41,68 @@ void ofxAbletonLink::setup(double tempo, ofxAbletonLinkListener* listener)
     link = new ableton::Link(tempo);
     listener = listener;
     link->setNumPeersCallback([this](std::size_t peers) {
-        if (this->listener != 0)
+            if (this->listener != 0)
             this->listener->onNumberOfPeersChanged(static_cast<unsigned long>(peers));
-    });
+            });
     link->setTempoCallback([this](const double bpm) {
-        if (this->listener != 0)
+            if (this->listener != 0)
             this->listener->onTempoChanged(bpm);
-    });
+            });
     link->enable(true);
 }
 
-void ofxAbletonLink::setTempo(double bpm, std::chrono::microseconds atTime)
-{
+void ofxAbletonLink::setTempo(double bpm, std::chrono::microseconds atTime){
     if (link == 0) {
         return;
     }
     auto timeline = link->captureAppTimeline();
-	timeline.setTempo(bpm, atTime);
+    timeline.setTempo(bpm, atTime);
 }
 
-double ofxAbletonLink::tempo()
-{
+double ofxAbletonLink::tempo(){
     if (link == 0) {
         return 0.0;
     }
-	return link->captureAppTimeline().tempo();
+    return link->captureAppTimeline().tempo();
 }
 
-void ofxAbletonLink::setQuantum(double quantum)
-{
+void ofxAbletonLink::setQuantum(double quantum){
     this->quantum_ = quantum;
 }
 
-double ofxAbletonLink::quantum()
-{
+double ofxAbletonLink::quantum(){
     return quantum_;
 }
 
-bool ofxAbletonLink::isEnabled() const
-{
+bool ofxAbletonLink::isEnabled() const{
     if (link == 0) {
         return false;
     }
     return link->isEnabled();
 }
 
-void ofxAbletonLink::enable(bool bEnable)
-{
+void ofxAbletonLink::enable(bool bEnable){
     if (link == 0) {
         return false;
     }
     return link->enable(bEnable);
 }
 
-unsigned long ofxAbletonLink::numberOfPeers()
-{
+unsigned long ofxAbletonLink::numberOfPeers(){
     if (link == 0) {
         return 0;
     }
-	return static_cast<unsigned long>(link->numPeers());
+    return static_cast<unsigned long>(link->numPeers());
 }
 
-ofxAbletonLink::Result ofxAbletonLink::update()
-{
+ofxAbletonLink::Result ofxAbletonLink::update(){
     Result result;
     if (link == 0) {
         return result;
     }
-	const auto time = link->clock().micros();
-	auto timeline = link->captureAppTimeline();
-    
+    const auto time = link->clock().micros();
+    auto timeline = link->captureAppTimeline();
+
     result.beat  = timeline.beatAtTime(time, quantum_);
     result.phase = timeline.phaseAtTime(time, quantum_);
     return result;
