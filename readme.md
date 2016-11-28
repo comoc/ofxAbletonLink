@@ -1,6 +1,6 @@
 # ofxAbletonLink
 
-ofxAbletonLink is a [Ableton Link](https://github.com/Ableton/link) addon for [openFrameworks](http://openframeworks.cc)
+ofxAbletonLink is an [Ableton Link](https://github.com/Ableton/link) addon for [openFrameworks](http://openframeworks.cc)
 
 # Installation
 
