@@ -16,13 +16,15 @@ void ofApp::draw(){
     
     // visualize the current status
     int quantum = (int)ceil(link.quantum());
-    int nbeat = (int)floor(status.beat) % quantum;
+    int nbeat;
     float dw;
-    if (quantum <= 0)
+    if(quantum < 1){
         dw = (float)ofGetWidth();
-    else
+        nbeat = 0;
+    }else{
         dw = (float)ofGetWidth() / (float)quantum;
-
+        nbeat = (int)floor(status.beat) % quantum;
+    }
     int top = (int)(ofGetHeight() * 0.3);
     int bottom = (int)(ofGetHeight() * 0.7);
     int h = bottom - top + 1;
