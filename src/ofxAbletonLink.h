@@ -46,10 +46,10 @@ class ofxAbletonLinkListener;
 class ofxAbletonLink
 {
     public:
-        struct Result {
+        struct Status {
             double beat;
             double phase;
-            Result() : beat(0.0), phase(0.0) {}
+            Status() : beat(0.0), phase(0.0) {}
         };
         ofxAbletonLink();
         ~ofxAbletonLink();
@@ -59,9 +59,9 @@ class ofxAbletonLink
         ofxAbletonLink(ofxAbletonLink&&) = delete;
         ofxAbletonLink& operator=(ofxAbletonLink&&) = delete;
 
-        void setup(double tempo, ofxAbletonLinkListener* listener = 0);
+        void setup(double bpm, ofxAbletonLinkListener* listener = 0);
 
-        void setTempo(double, std::chrono::microseconds atTime);
+        void setTempo(double bpm, std::chrono::microseconds atTime);
         double tempo();
 
         void setQuantum(double quantum);
@@ -70,9 +70,9 @@ class ofxAbletonLink
         bool isEnabled() const;
         void enable(bool bEnable);
 
-        unsigned long numberOfPeers();
+        std::size_t numPeers();
 
-        Result update();
+        Status update();
 
     private:
         ableton::Link* link;
