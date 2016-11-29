@@ -2,24 +2,54 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    link.setup(120, this);
+    link.setup(120);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofxAbletonLink::Result res = link.update();
-    ofLog(OF_LOG_NOTICE, "Tempo: " + ofToString(link.tempo()) + " Beat: " + ofToString(res.beat) + " Phase: " + ofToString(res.phase));
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofxAbletonLink::Status status = link.update();
+    
+    // display information
+    int quantum = ceil(link.quantum());
+    int nbeat = static_cast<int>(floor(status.beat)) % quantum;
+    float dw;
+    if (quantum <= 0)
+        dw = (float)ofGetWidth();
+    else
+        dw = (float)ofGetWidth() / (float)quantum;
 
+    int h = ofGetHeight() / 2;
+    for (int i = 0; i < quantum; i++){
+        ofFill();
+        if(i <= nbeat){
+            ofSetColor(255);
+            ofDrawRectangle(i * dw, h, dw, h);
+        }else{
+            ofSetColor(128);
+            ofDrawRectangle(i * dw, h, dw, h);
+        }
+        ofNoFill();
+        ofSetColor(0);
+        ofDrawRectangle(i * dw, h, dw, h);
+    }
+    
+    ofSetColor(0);
+    ofDrawBitmapString("Tempo: " + ofToString(link.tempo()) + " Beat: " + ofToString(status.beat) + " Phase: " + ofToString(status.phase), 20, 20);
+    ofDrawBitmapString("Number of peers: " + ofToString(link.numPeers()), 20, 40);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == OF_KEY_RIGHT){
+        link.setQuantum(link.quantum() + 1);
+    }else if (key == OF_KEY_LEFT){
+        link.setQuantum(link.quantum() - 1);
+    }
 }
 
 //--------------------------------------------------------------
@@ -72,12 +102,3 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 }
 
-//--------------------------------------------------------------
-void ofApp::onNumberOfPeersChanged(unsigned long peers){
-    ofLog(OF_LOG_NOTICE, "onNumberOfPeersChanged " + ofToString(peers));
-}
-
-//--------------------------------------------------------------
-void ofApp::onTempoChanged(double tempo){
-    ofLog(OF_LOG_NOTICE, "onTempoChanged " + ofToString(tempo));
-}

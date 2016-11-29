@@ -18,48 +18,47 @@
  */
 
 #include "ofxAbletonLink.h"
+#include <algorithm>
 
 ofxAbletonLink::ofxAbletonLink()
     : link(nullptr),
-    listener(nullptr),
     quantum_(4.0){
 }
 
 ofxAbletonLink::~ofxAbletonLink(){
-    if (link != nullptr) {
+    if(link != nullptr){
         link->enable(false);
         delete link;
     }
 }
 
-void ofxAbletonLink::setup(double tempo, ofxAbletonLinkListener* listener){
-    if (link != nullptr) {
+void ofxAbletonLink::setup(double tempo){
+    if(link != nullptr){
         link->enable(false);
         delete link;
     }
     link = new ableton::Link(tempo);
-    listener = listener;
-    link->setNumPeersCallback([this](std::size_t peers) {
-            if (this->listener != nullptr)
-            this->listener->onNumberOfPeersChanged(static_cast<unsigned long>(peers));
-            });
-    link->setTempoCallback([this](const double bpm) {
-            if (this->listener != nullptr)
-            this->listener->onTempoChanged(bpm);
-            });
+    link->setNumPeersCallback([this](std::size_t /*peers*/){
+        // nop
+    });
+    link->setTempoCallback([this](const double /*bpm*/){
+        // nop
+    });
     link->enable(true);
 }
 
-void ofxAbletonLink::setTempo(double bpm, std::chrono::microseconds atTime){
-    if (link == nullptr) {
-        return;
-    }
-    auto timeline = link->captureAppTimeline();
-    timeline.setTempo(bpm, atTime);
-}
+// TODO: this setTempo() method do not work yet.
+//void ofxAbletonLink::setTempo(double bpm){
+//    if (link == nullptr){
+//        return;
+//    }
+//    auto timeline = link->captureAppTimeline();
+//    const auto time = link->clock().micros();
+//    timeline.setTempo(bpm, time);//std::chrono::microseconds::zero());
+//}
 
 double ofxAbletonLink::tempo(){
-    if (link == nullptr) {
+    if(link == nullptr){
         return 0.0;
     }
     return link->captureAppTimeline().tempo();
@@ -74,21 +73,21 @@ double ofxAbletonLink::quantum(){
 }
 
 bool ofxAbletonLink::isEnabled() const{
-    if (link == nullptr) {
+    if(link == nullptr){
         return false;
     }
     return link->isEnabled();
 }
 
 void ofxAbletonLink::enable(bool bEnable){
-    if (link == nullptr) {
+    if(link == nullptr){
         return false;
     }
     return link->enable(bEnable);
 }
 
 std::size_t ofxAbletonLink::numPeers(){
-    if (link == nullptr) {
+    if(link == nullptr){
         return 0;
     }
     return link->numPeers();
@@ -96,12 +95,11 @@ std::size_t ofxAbletonLink::numPeers(){
 
 ofxAbletonLink::Status ofxAbletonLink::update(){
     Status status;
-    if (link == nullptr) {
+    if(link == nullptr){
         return status;
     }
     const auto time = link->clock().micros();
     auto timeline = link->captureAppTimeline();
-
     status.beat  = timeline.beatAtTime(time, quantum_);
     status.phase = timeline.phaseAtTime(time, quantum_);
     return status;

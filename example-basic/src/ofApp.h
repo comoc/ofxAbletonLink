@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxAbletonLink.h"
 
-class ofApp : public ofBaseApp, ofxAbletonLinkListener {
+class ofApp : public ofBaseApp{
 
 	public:
 		void setup();
@@ -22,10 +22,7 @@ class ofApp : public ofBaseApp, ofxAbletonLinkListener {
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-		void onNumberOfPeersChanged(unsigned long peers);
-		void onTempoChanged(double tempo);
-    
-	private:
+    private:
 		ofxAbletonLink link;
 		
 };

@@ -37,19 +37,15 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
-// #if LINK_PLATFORM_UNIX
-// #include <termios.h>
-// #endif
 
 class ofxAbletonLinkListener;
 
-class ofxAbletonLink
-{
+class ofxAbletonLink{
     public:
-        struct Status {
+        struct Status{
             double beat;
             double phase;
-            Status() : beat(0.0), phase(0.0) {}
+            Status() : beat(0.0), phase(0.0){}
         };
         ofxAbletonLink();
         ~ofxAbletonLink();
@@ -59,9 +55,10 @@ class ofxAbletonLink
         ofxAbletonLink(ofxAbletonLink&&) = delete;
         ofxAbletonLink& operator=(ofxAbletonLink&&) = delete;
 
-        void setup(double bpm, ofxAbletonLinkListener* listener = 0);
+        void setup(double bpm);
 
-        void setTempo(double bpm, std::chrono::microseconds atTime);
+        // TODO: this setTempo() method do not work yet.
+        //void setTempo(double bpm);
         double tempo();
 
         void setQuantum(double quantum);
@@ -76,19 +73,7 @@ class ofxAbletonLink
 
     private:
         ableton::Link* link;
-        ofxAbletonLinkListener* listener;
         double quantum_;
 };
 
-class ofxAbletonLinkListener
-{
-    public:
-        ofxAbletonLinkListener() {}
-        virtual ~ofxAbletonLinkListener() {}
-        virtual void onNumberOfPeersChanged(unsigned long peers) = 0;
-        virtual void onTempoChanged(double tempo) = 0;
-        ofxAbletonLinkListener(const ofxAbletonLinkListener&) = delete;
-        ofxAbletonLinkListener(ofxAbletonLinkListener&&) = delete;
-        ofxAbletonLinkListener& operator=(ofxAbletonLinkListener&&) = delete;
-};
 
