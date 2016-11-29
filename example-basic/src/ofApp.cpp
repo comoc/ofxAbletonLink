@@ -23,23 +23,20 @@ void ofApp::draw(){
     else
         dw = (float)ofGetWidth() / (float)quantum;
 
-    int h = ofGetHeight() / 2;
+    int top = (int)(ofGetHeight() * 0.3);
+    int bottom = (int)(ofGetHeight() * 0.7);
+    int h = bottom - top + 1;
     for (int i = 0; i < quantum; i++){
         ofFill();
-        if(i <= nbeat){
-            ofSetColor(255);
-            ofDrawRectangle(i * dw, h, dw, h);
-        }else{
-            ofSetColor(128);
-            ofDrawRectangle(i * dw, h, dw, h);
-        }
+        ofSetColor((i <= nbeat) ? 255 : 128);
+        ofDrawRectangle(i * dw, top, dw, h);
         ofNoFill();
         ofSetColor(0);
-        ofDrawRectangle(i * dw, h, dw, h);
+        ofDrawRectangle(i * dw, top, dw, h);
     }
     
     ofSetColor(0);
-    ofDrawBitmapString("Tempo: " + ofToString(link.tempo()) + " Beat: " + ofToString(status.beat) + " Phase: " + ofToString(status.phase), 20, 20);
+    ofDrawBitmapString("Tempo: " + ofToString(link.tempo()) + " Beats: " + ofToString(status.beat) + " Phase: " + ofToString(status.phase), 20, 20);
     ofDrawBitmapString("Number of peers: " + ofToString(link.numPeers()), 20, 40);
 }
 
