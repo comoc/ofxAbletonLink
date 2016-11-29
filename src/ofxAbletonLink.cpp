@@ -47,15 +47,16 @@ void ofxAbletonLink::setup(double tempo){
     link->enable(true);
 }
 
-// TODO: this setTempo() method do not work yet.
-//void ofxAbletonLink::setTempo(double bpm){
-//    if (link == nullptr){
-//        return;
-//    }
-//    auto timeline = link->captureAppTimeline();
-//    const auto time = link->clock().micros();
-//    timeline.setTempo(bpm, time);//std::chrono::microseconds::zero());
-//}
+void ofxAbletonLink::setTempo(double bpm){
+    if (link == nullptr){
+        return;
+    }
+    auto timeline = link->captureAppTimeline();
+    const auto time = link->clock().micros();
+    timeline.setTempo(bpm, time);
+    link->commitAppTimeline(timeline);
+    
+}
 
 double ofxAbletonLink::tempo(){
     if(link == nullptr){

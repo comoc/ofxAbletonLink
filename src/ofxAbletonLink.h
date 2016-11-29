@@ -30,7 +30,6 @@
 #endif
 
 #include "Link.hpp"
-//#include "AudioPlatform.hpp"
 
 #include <algorithm>
 #include <atomic>
@@ -57,8 +56,7 @@ class ofxAbletonLink{
 
         void setup(double bpm);
 
-        // TODO: this setTempo() method do not work yet.
-        //void setTempo(double bpm);
+        void setTempo(double bpm);
         double tempo();
 
         void setQuantum(double quantum);
@@ -75,5 +73,4 @@ class ofxAbletonLink{
         ableton::Link* link;
         double quantum_;
 };
-
 

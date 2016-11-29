@@ -14,9 +14,9 @@ void ofApp::update(){
 void ofApp::draw(){
     ofxAbletonLink::Status status = link.update();
     
-    // display information
-    int quantum = ceil(link.quantum());
-    int nbeat = static_cast<int>(floor(status.beat)) % quantum;
+    // visualize the current status
+    int quantum = (int)ceil(link.quantum());
+    int nbeat = (int)floor(status.beat) % quantum;
     float dw;
     if (quantum <= 0)
         dw = (float)ofGetWidth();
@@ -49,6 +49,10 @@ void ofApp::keyPressed(int key){
         link.setQuantum(link.quantum() + 1);
     }else if (key == OF_KEY_LEFT){
         link.setQuantum(link.quantum() - 1);
+    }else if (key == OF_KEY_UP){
+        link.setTempo(link.tempo() + 1);
+    }else if (key == OF_KEY_DOWN){
+        link.setTempo(link.tempo() - 1);
     }
 }
 
