@@ -13,7 +13,8 @@ $ git submodule update --init --recursive
 
 ## Example
 
-- `example-basic`: The simplest demo. It works with other Ableton Link applications.
+- `example-basic`: The simplest demo. This demo acts with other Ableton Link applications.
+- `example-animation`: A sprite animation speed control demo. This demo acts with other Ableton Link applications. (Thank you [Irasutoya](http://www.irasutoya.com/))
 
 ## Demo
 
