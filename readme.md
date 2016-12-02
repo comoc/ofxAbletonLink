@@ -19,4 +19,4 @@ This gif shows the state of tempo synchronization between our `example-basic` an
 
 ## Note
 
-ofxabletonlink is including the modules of [Ableton/link](https://github.com/Ableton/link), [chriskohlhoff/asio](https://github.com/chriskohlhoff/asio) and [philsquared/Catch](https://github.com/philsquared/Catch).
+This repository's ofxabletonlink is including the modules of [Ableton/link](https://github.com/Ableton/link), [chriskohlhoff/asio](https://github.com/chriskohlhoff/asio) and [philsquared/Catch](https://github.com/philsquared/Catch).
