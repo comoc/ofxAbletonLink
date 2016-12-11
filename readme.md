@@ -20,6 +20,6 @@ This gif shows the state of tempo synchronization between our `example-basic` an
 
 ## Notes
 
-This addon is including the modules of [Ableton/link](https://github.com/Ableton/link), [chriskohlhoff/asio](https://github.com/chriskohlhoff/asio) and [philsquared/Catch](https://github.com/philsquared/Catch).
+This repository is including a copy of [Ableton/link](https://github.com/Ableton/link), [chriskohlhoff/asio](https://github.com/chriskohlhoff/asio) and [philsquared/Catch](https://github.com/philsquared/Catch).
 
 This addon is tested on macOS Sierra only.
