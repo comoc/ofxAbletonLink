@@ -5,6 +5,7 @@ ofxAbletonLink is an [Ableton Link](https://github.com/Ableton/link) addon for [
 ## Installation
 
 To install ofxAbletonLink, move the ofxAbletonLink folder to your `of/addons/` folder.
+A compiler that supports C++ 11 is required.
 
 ## Examples
 
@@ -17,6 +18,8 @@ This gif shows the state of tempo synchronization between our `example-basic` an
 
 <img src="https://i.gyazo.com/95d1fde2180d1f6b1156bfe96196c1c5.gif" alt="https://gyazo.com/95d1fde2180d1f6b1156bfe96196c1c5" width="600">
 
-## Note
+## Notes
 
-ofxabletonlink is including the modules of [Ableton/link](https://github.com/Ableton/link), [chriskohlhoff/asio](https://github.com/chriskohlhoff/asio) and [philsquared/Catch](https://github.com/philsquared/Catch).
+This addon is including the modules of [Ableton/link](https://github.com/Ableton/link), [chriskohlhoff/asio](https://github.com/chriskohlhoff/asio) and [philsquared/Catch](https://github.com/philsquared/Catch).
+
+This addon is tested on macOS Sierra only.
