@@ -63,7 +63,7 @@ bool ofxAbletonLink::isEnabled() const{
 
 void ofxAbletonLink::enable(bool bEnable){
     if(link == nullptr){
-        false;
+        return;
     }
     link->enable(bEnable);
 }
