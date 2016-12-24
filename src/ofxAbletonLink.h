@@ -18,8 +18,6 @@
 #include <iostream>
 #include <thread>
 
-class ofxAbletonLinkListener;
-
 class ofxAbletonLink{
     public:
         struct Status{
