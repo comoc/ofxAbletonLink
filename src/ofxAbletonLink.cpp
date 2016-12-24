@@ -63,9 +63,9 @@ bool ofxAbletonLink::isEnabled() const{
 
 void ofxAbletonLink::enable(bool bEnable){
     if(link == nullptr){
-        return false;
+        false;
     }
-    return link->enable(bEnable);
+    link->enable(bEnable);
 }
 
 std::size_t ofxAbletonLink::numPeers(){
