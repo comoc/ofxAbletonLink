@@ -6,6 +6,12 @@ ofxAbletonLink is an [Ableton Link](https://github.com/Ableton/link) addon for [
 
 To install ofxAbletonLink, move the ofxAbletonLink folder to your `of/addons/` folder.
 A compiler that supports C++ 11 is required.
+ofxAbletonLink relies on `link`, `asio-standalone` and `catch` as submodules. After checking out the
+main repositories, those submodules have to be loaded using
+
+```
+git submodule update --init --recursive
+```
 
 ## Examples
 
